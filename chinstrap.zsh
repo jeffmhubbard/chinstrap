@@ -66,11 +66,11 @@ rootdev=/dev/sda
 ## INTERNAL VARIABLES (do not edit)
 script=$0
 
+# custom package list, overwrites $packages
+custom=${script:A:h}/packages.txt
+
 # mount point for chroot
 chroot=/mnt
-
-# custom package list, overwrites $packages
-custom=${0:A:h}/packages.txt
 
 # for color output
 m='\033[1;37m'  # msg, yellow

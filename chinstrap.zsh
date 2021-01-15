@@ -188,7 +188,7 @@ function stage1 {
       packages+=($line)
     done < $custom
   fi
-  packages=($packages zsh)
+  packages+=(zsh)   # make sure we have zsh in chroot
   pacstrap $chroot ${packages[*]} --needed
 
   unset line packages
@@ -318,7 +318,7 @@ function stage2 {
 
 
 function finish_prompt() {
-  if read -q REPLY\?"Would you like to reboot now? (y/n)"
+  if read -q REPLY\?"Would you like to reboot now? (y/n)\n"
   then
     reboot
   else

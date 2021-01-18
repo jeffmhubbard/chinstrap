@@ -318,11 +318,11 @@ function stage2 {
 
 
 function finish_prompt() {
-  if read -q REPLY\?"Would you like to reboot now? (y/n)\n"
+  if read -q REPLY\?"Would you like to reboot now? (y/n)"
   then
     reboot
   else
-    echo "${m}Continuing with live system, reboot when ready!${n}"
+    echo "\n${m}Continuing with live system, reboot when ready!${n}"
   fi
 }
 

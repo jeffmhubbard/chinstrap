@@ -342,7 +342,7 @@ function finish_prompt() {
   then
     reboot
   else
-    echo "\n${m}Continuing with live system, reboot when ready!${n}"
+    echo "${m}Continuing with live system, reboot when ready!${n}"
   fi
 }
 

@@ -1,6 +1,6 @@
 ﻿# chinstrap.zsh
 
-A simple one-shot install script for [***Penguin***](https://penguin.fyi) and is a component of [penguin-iso](https://code.linuxit.us/penguin-iso). It is based on the steps described in the [Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide). It only provides a basic framework for installation and navigates the `chroot` for you. You will need basic Linux and shell scripting (`zsh`) knowledge to use this.
+A simple one-shot install script for [***Penguin***](https://penguin.fyi) and is a component of [penguin/iso](https://git.linuxit.us/penguin/iso). It is based on the steps described in the [Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide). It only provides a basic framework for installation and navigates the `chroot` for you. You will need basic Linux and shell scripting (`zsh`) knowledge to use this.
 
 This script does not configure the live system or connect to the network. If you need a special keymap or language, you must configure that yourself. You **must be connected to the Internet** for the script to run.
 

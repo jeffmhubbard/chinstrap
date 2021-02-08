@@ -35,11 +35,11 @@ vcfont="default8x16"
 locale="en_US"
 timezone="America/Chicago"
 
-# install full desktop
+# install full developer desktop
 packages=(
   penguin-base
   penguin-desktop
-  penguin-desktop-defaults
+  penguin-dev-tools
 )
 
 # kernel
@@ -53,9 +53,9 @@ packages+=(linux)
 #packages+=(intel-ucode)
 
 # video drivers
-packages+=(xorg-drivers)
 #packages+=(nvidia)
 #packages+=(vulkan-radeon)
+packages+=(xorg-drivers)
 
 # laptop power management (enable service in stage2)
 #packages+=(tlp)

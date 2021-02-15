@@ -111,7 +111,7 @@ function stage1 {
   fi
 
   echo "${m}Are you ready to begin?${n}"
-  vared -cp "Confirm (y/n)? " ans
+  vared -cp "Confirm (y/N)? " ans
   [[ "$ans" =~ ^[Yy]$ ]] || exit 1
 
 ###############################################################################

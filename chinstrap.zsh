@@ -39,8 +39,10 @@ timezone="America/Chicago"
 packages=(
   penguin-base
   penguin-desktop
-  penguin-dev-tools
 )
+
+# developer tools
+#packages+=(base-devel penguin-dev-tools)
 
 # kernel
 packages+=(linux)
@@ -53,9 +55,9 @@ packages+=(linux)
 #packages+=(intel-ucode)
 
 # video drivers
+packages+=(xorg-drivers)
 #packages+=(nvidia)
 #packages+=(vulkan-radeon)
-packages+=(xorg-drivers)
 
 # laptop power management (enable service in stage2)
 #packages+=(tlp)
@@ -113,6 +115,7 @@ function stage1 {
   echo "${m}Are you ready to begin?${n}"
   vared -cp "Confirm (y/N)? " ans
   [[ "$ans" =~ ^[Yy]$ ]] || exit 1
+  unset ans
 
 ###############################################################################
 ##  STAGE 1, PARTITION AND FORMAT TARGET DISK, INSTALL SOFTWARE PACKAGES     ##
@@ -227,25 +230,35 @@ function stage1 {
   genfstab -U -p $chroot > $chroot/etc/fstab
 
   echo "${m}Starting chroot environment...${n}"
-  local script2=${script:t}
 
   # copy script to chroot env
+  local script2=${script:t}
   install -Dm755 $script $chroot/$script2
 
-  # enter chroot (stage2)
+  # enter chroot (starts stage2)
   arch-chroot $chroot /$script2 --chroot
 
   # cleanup
   rm $chroot/$script2
+  unset script2
 
   echo "${m}Unmounting partitions...${n}"
   umount -R $chroot
   swapoff -a
 
-  unset script2
-
   echo "${i}Installation is complete =)${n}"
-  finish_prompt
+  echo "${m}Would you like to reboot now?${n}"
+  vared -cp "Confirm (y/N)? " ans
+  if [[ "$ans" =~ ^[Yy]$ ]]
+  then
+    echo "${m}The system will restart in 5 seconds...${n}"
+    echo "${m}Remember to remove the installation media to boot to your new system!${n}"
+    sleep 5
+    reboot
+  else
+    echo "${m}Continuing with live system, reboot when ready!${n} "
+  fi
+  unset ans
 }
 
 
@@ -343,16 +356,6 @@ function stage2 {
   passwd || { echo "${e}YOU MUST SET A ROOT PASSWORD!${n}"; passwd }
 
   return
-}
-
-
-function finish_prompt() {
-  if read -q REPLY\?"Would you like to reboot now? (y/n)"
-  then
-    reboot
-  else
-    echo "${m}Continuing with live system, reboot when ready!${n} "
-  fi
 }
 
 

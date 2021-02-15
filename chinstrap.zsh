@@ -230,10 +230,12 @@ function stage1 {
   local script2=${script:t}
 
   # copy script to chroot env
-  cp $script $chroot/$script2
-  chmod 755 $chroot/$script2
+  install -Dm755 $script $chroot/$script2
 
+  # enter chroot (stage2)
   arch-chroot $chroot /$script2 --chroot
+
+  # cleanup
   rm $chroot/$script2
 
   echo "${m}Unmounting partitions...${n}"
